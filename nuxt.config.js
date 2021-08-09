@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  mode: 'spa',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - cerensa',
@@ -25,7 +26,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    //'~plugins/vuetify-mask'
+    '~/plugins/vue-mask.js',
+    '~/plugins/vue-moment.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -42,11 +44,19 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-vuex-localstorage'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    credentials: false,
+    proxy: true, 
+    baseURL: 'https://api-test.cerensa.com/v3/talents',
+    common: {
+      'Accept': 'application/json, text/plain, */*'
+    },
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

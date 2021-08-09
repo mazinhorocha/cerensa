@@ -104,7 +104,7 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: 'Cliente',
-          to: '/cliente/master'
+          to: '/clientes'
         }
       ],
       miniVariant: false,
