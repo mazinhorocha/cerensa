@@ -28,7 +28,15 @@
               <v-text-field v-model="cliente.stateDocument" label="RG/IE" outlined dense></v-text-field>
             </v-col>
             <v-col cols="4" md="4" sm="12">
-              <v-text-field v-model="cliente.birthDate" label="Nascimento" outlined dense></v-text-field>
+              <v-text-field
+                v-bind="cliente.birthDate"
+                :value="formatdDate"
+                label="Nascimento"
+                hint="formato DD/MM/YYYY"
+                persistent-hint
+                prepend-icon="mdi-calendar"
+              ></v-text-field>
+              <!-- <v-text-field v-model="cliente.birthDate" label="Nascimento" outlined dense></v-text-field> -->
             </v-col>
           </v-row>
 
@@ -119,18 +127,24 @@ export default {
     }
   },
 
-  methods: {
-    validate () {
-      this.$refs.form.validate()
-      this.saveDialog = true;
-    }
-  },
-
   async fetch(){
     this.overlay = true;
       const data = await this.$axios.$get(`https://api-test.cerensa.com/v3/talents/people/${this.clientID}`)
       this.cliente = data;
     this.overlay = false;
+  },
+
+  computed: {
+    formatDate(){
+      return this.cliente.birthDate ? this.$moment(this.cliente.birthDate) : null
+    },
+  },
+
+  methods: {
+    validate () {
+      this.$refs.form.validate()
+      this.saveDialog = true;
+    }
   }
 }
 </script>

@@ -145,7 +145,7 @@
             this.updateStore()
           },
 
-          updateStore(client){
+          updateStore(){
             this.$store.commit('cliente/updateCliente', this.client)
           }
         }

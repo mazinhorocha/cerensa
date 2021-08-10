@@ -1,8 +1,8 @@
 <template>
-  <v-container>
+  <v-container justify="center" align="center" class="pt-16">
     <v-row justify="center" align="center">
       <v-col cols="6" sm="12" md="6">
-        <h1>A Plataforma de gestão e análise de sustentabilidade para empresas de qualquer tamanho</h1>
+        <h1 class="blue--text darken-4">A Plataforma de gestão e análise de sustentabilidade para empresas de qualquer tamanho</h1>
       </v-col>
       <v-col cols="6" md="6" sm="12">
       <v-card>
