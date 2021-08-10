@@ -3,19 +3,26 @@ export const state = () => ({
 })
 
 export const getters = {
-    showClients(state){
-        return state.list
-    }
+  showClients(state){
+      return state.list
+  }
 }
 
 export const mutations = {
-    addClient (state, payload){
-        state.list.push(...payload)
-    }
+  createClient (state, payload){
+    state.list.push(...payload)
+  },
+
+  updateCliente (state, payload){
+    state.list.find((item, index) => {
+      if(item.id === payload.id)
+        state.list[index] = payload;
+    })
+  }
 }
 
 export const actions = {
-    insertClient({commit}, payload){
-        commit('addClient', payload)
-    }
+  insertClient({commit}, payload){
+      commit('addClient', payload)
+  }
 }

@@ -7,67 +7,74 @@
           <v-spacer></v-spacer>
           <nuxt-link to="/clientes" class="btn grey lighten-4">
             <v-btn  color="grey lighten-4" class="mb-2">VOLTAR</v-btn>
-          </nuxt-link>                         
+          </nuxt-link>
       </v-toolbar>
       <v-container>
-        <v-row>
-          <v-col cols="2" md="2" sm="12">
-            <v-text-field v-model="cliente.id" label="ID" dense></v-text-field>
-          </v-col>
-          <v-col cols="6" md="6" sm="12">
-            <v-text-field v-model="cliente.name" label="Nome" dense></v-text-field>
-          </v-col>
-          <v-col cols="4" md="4" sm="12">
-            <v-text-field v-model="cliente.type" label="Tipo" dense></v-text-field>
-          </v-col>
-          <v-col cols="4" md="4" sm="12">
-            <v-text-field v-model="cliente.federalDocument" label="CPF/CNPJ" dense></v-text-field>
-          </v-col>
-          <v-col cols="4" md="4" sm="12">
-            <v-text-field v-model="cliente.stateDocument" label="RG/IE" dense></v-text-field>
-          </v-col>
-          <v-col cols="4" md="4" sm="12">
-            <v-text-field v-model="cliente.birthDate" label="Nascimento" dense></v-text-field>
-          </v-col>
-        </v-row>
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-row>
+            <v-col cols="2" md="2" sm="12">
+              <v-text-field v-model="cliente.id" label="ID" outlined dense disabled></v-text-field>
+            </v-col>
+            <v-col cols="6" md="6" sm="12">
+              <v-text-field v-model="cliente.name" label="Nome" outlined dense required></v-text-field>
+            </v-col>
+            <v-col cols="4" md="4" sm="12">
+              <v-text-field v-model="cliente.type" label="Tipo" outlined dense required></v-text-field>
+            </v-col>
+            <v-col cols="4" md="4" sm="12">
+              <v-text-field v-model="cliente.federalDocument" label="CPF/CNPJ" outlined dense required></v-text-field>
+            </v-col>
+            <v-col cols="4" md="4" sm="12">
+              <v-text-field v-model="cliente.stateDocument" label="RG/IE" outlined dense></v-text-field>
+            </v-col>
+            <v-col cols="4" md="4" sm="12">
+              <v-text-field v-model="cliente.birthDate" label="Nascimento" outlined dense></v-text-field>
+            </v-col>
+          </v-row>
 
-        <v-row>
-          <v-col cols="12">
-            <h3>Endereço</h3>
-          </v-col>
-          <v-col cols="3" md="3" sm="12">
-            <v-text-field v-model="cliente.address.zipCode" label="CEP" dense></v-text-field>
-          </v-col>
-          <v-col cols="6" md="6" sm="12">
-            <v-text-field v-model="cliente.address.street" label="Rua" dense></v-text-field>
-          </v-col>
-          <v-col cols="3" md="3" sm="12">
-            <v-text-field v-model="cliente.address.number" label="Número" dense></v-text-field>
-          </v-col>
-          <v-col cols="6" md="6" sm="12">
-            <v-text-field v-model="cliente.address.complement" label="Complemento" dense></v-text-field>
-          </v-col>
-          <v-col cols="6" md="6" sm="12">
-            <v-text-field v-model="cliente.address.district" label="Bairro" dense></v-text-field>
-          </v-col>
-          <v-col cols="6" md="6" sm="12">
-            <v-text-field v-model="cliente.address.city" label="Cidade" dense></v-text-field>
-          </v-col>
-          <v-col cols="6" md="6" sm="12">
-            <v-text-field v-model="cliente.address.state" label="Estado" dense></v-text-field>
-          </v-col>
-        </v-row>
+          <v-row>
+            <v-col cols="12">
+              <h3>Endereço</h3>
+            </v-col>
+            <v-col cols="3" md="3" sm="12">
+              <v-text-field v-model="cliente.address.zipCode" label="CEP" outlined dense></v-text-field>
+            </v-col>
+            <v-col cols="6" md="6" sm="12">
+              <v-text-field v-model="cliente.address.street" label="Rua" outlined dense></v-text-field>
+            </v-col>
+            <v-col cols="3" md="3" sm="12">
+              <v-text-field v-model="cliente.address.number" label="Número" outlined dense></v-text-field>
+            </v-col>
+            <v-col cols="6" md="6" sm="12">
+              <v-text-field v-model="cliente.address.complement" label="Complemento" outlined dense></v-text-field>
+            </v-col>
+            <v-col cols="6" md="6" sm="12">
+              <v-text-field v-model="cliente.address.district" label="Bairro" outlined dense></v-text-field>
+            </v-col>
+            <v-col cols="6" md="6" sm="12">
+              <v-text-field v-model="cliente.address.city" label="Cidade" outlined dense></v-text-field>
+            </v-col>
+            <v-col cols="6" md="6" sm="12">
+              <v-text-field v-model="cliente.address.state" label="Estado" outlined dense></v-text-field>
+            </v-col>
+          </v-row>
+
+          <cliente-contatos :cliente="cliente"></cliente-contatos>
+
+          <v-row>
+            <v-col cols="12" md="12" sm="6">
+              <v-btn class="success" @click="validate()">Atualizar</v-btn>
+            </v-col>
+          </v-row>
+        </v-form>
       </v-container>
    </v-card>
 
-    <v-spacer></v-spacer>
-    <cliente-contatos :contatos="cliente.contacts"></cliente-contatos>
-
-    <v-row>
-      <v-col cols="12" md="12" sm="6">
-        <v-btn class="success">Atualizar</v-btn>
-      </v-col>
-    </v-row>
+    <v-dialog v-model="saveDialog" max-width="600px">
+      <v-card>
+        <v-card-title class="text-h5">Funcionalidade de gravação não disponível</v-card-title>
+      </v-card>
+    </v-dialog>
 
    <v-overlay :value="overlay">
       <v-progress-circular
@@ -81,7 +88,7 @@
 
 <script>
 export default {
-  asyncData({params}){ 
+  asyncData({params}){
     const clientID = params.cliente;
     return  { clientID };
   },
@@ -89,7 +96,7 @@ export default {
   data(){
     return {
       overlay: false,
-
+      saveDialog: false,
       cliente: {
         id: null,
         name: null,
@@ -112,19 +119,18 @@ export default {
     }
   },
 
+  methods: {
+    validate () {
+      this.$refs.form.validate()
+      this.saveDialog = true;
+    }
+  },
+
   async fetch(){
     this.overlay = true;
       const data = await this.$axios.$get(`https://api-test.cerensa.com/v3/talents/people/${this.clientID}`)
       this.cliente = data;
     this.overlay = false;
-    // this.$store.commit('cliente/addClient', data.results)
-  },
-  watch: {
-    overlay (val) {
-      val && setTimeout(() => {
-        this.overlay = false
-      }, 3000)
-    },
   }
 }
 </script>
