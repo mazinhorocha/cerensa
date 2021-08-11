@@ -1,6 +1,8 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer dark class="blue darken-1"
+    <v-navigation-drawer
+      dark
+      class="drawer"
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
@@ -11,9 +13,7 @@
         <v-container>
           <v-row>
             <v-col>
-              <v-img class="mx-auto"
-          src="https://cerensa.com/wp-content/uploads/elementor/thumbs/cerensa-logo-oqyohpfwmvu2t8o1yfvyirovn1pa5me2wa1qp8a6ck.png"
-          width="132"></v-img>
+              <v-img :src="logo" width="132" class="mx-auto"></v-img>
             </v-col>
           </v-row>
         </v-container>
@@ -35,54 +35,24 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
+
+    <v-app-bar :clipped-left="clipped" fixed app dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
+      <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
 
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
     </v-app-bar>
+
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
+
+    <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -90,28 +60,39 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
+      logo: 'https://cerensa.com/wp-content/uploads/elementor/thumbs/cerensa-logo-oqyohpfwmvu2t8o1yfvyirovn1pa5me2wa1qp8a6ck.png',
       clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       items: [
         {
           icon: 'mdi-apps',
           title: 'Dahsboard',
-          to: '/'
+          to: '/',
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Cliente',
-          to: '/clientes'
-        }
+          title: 'Clientes',
+          to: '/clientes',
+        },
       ],
       miniVariant: false,
-      right: true,
+      right: false,
       rightDrawer: false,
-      title: 'Dashboard'
+      title: 'Dashboard',
     }
-  }
+  },
 }
 </script>
+
+
+<style scoped>
+  .drawer{
+    background: #1d7cd6
+  }
+  .v-app-bar{
+    background: linear-gradient( 45deg, #00A69C, #1d7cd6);
+  }
+</style>

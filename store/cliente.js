@@ -10,7 +10,7 @@ export const getters = {
 
 export const mutations = {
   createClient (state, payload){
-    state.list.push(...payload)
+    state.list = [...payload]
   },
 
   updateCliente (state, payload){
